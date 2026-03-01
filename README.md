@@ -1,38 +1,160 @@
 <div align="center">
   <p>
-    <a>
       <img alt="Linux" src="https://img.shields.io/badge/Linux-%23.svg?style=flat-square&logo=linux&color=FCC624&logoColor=black" />
-    </a>
-    <a>
       <img alt="macOS" src="https://img.shields.io/badge/macOS-%23.svg?style=flat-square&logo=apple&color=000000&logoColor=white" />
-    </a>
-    <a>
       <img alt="Windows" src="https://img.shields.io/badge/Windows-%23.svg?style=flat-square&logo=windows&color=0078D6&logoColor=white" />
-    </a>
   <p>
 <div>
 
 <div align="left">
-  
+
+# 🍞 Bread's Neovim Configuration
+
+A fast, modern Neovim setup optimized for **programming in Lua, JavaScript/TypeScript, React, Python, C/C++, CSS, HTML**, and more. Includes LSP, autocompletion, snippets, fuzzy finding, and aesthetic themes.
+
+---
+
+## ⚡ Features
+
+- **LSP & Autocompletion**
+  - Powered by `nvim-lspconfig` and `mason.nvim`
+  - Servers included: `lua_ls`, `ts_ls` (JS/TS/React/Node), `pyright`, `clangd`, `cssls`, `html`, `tailwindcss`
+  - Auto-completion with `nvim-cmp` + snippets (`LuaSnip`)
+  - Keymaps for go-to-definition, hover, rename, and code actions
+
+- **Themes & Appearance**
+  - Supports multiple color schemes: `catppuccin`, `gruvbox`, `pywal16`
+  - Statusline with `lualine.nvim`  
+  - Pretty icons with `nvim-web-devicons`
+  - Color highlights via `nvim-colorizer.lua`
+
+- **Productivity Tools**
+  - File navigation and fuzzy finder: `fzf-lua`
+  - Git integration: `gitsigns.nvim`
+  - Harpoon for quick file navigation
+  - Commenting: `Comment.nvim`
+  - Auto-pairs for brackets/quotes: `nvim-autopairs`
+  - Floating terminal: `FTerm.nvim`
+  - Markdown preview inline: `render-markdown.nvim`
+  - CSV viewer: `decisive.nvim`
+  - Twilight plugin for focusing on code blocks
+
+- **Editing Enhancements**
+  - Treesitter-powered syntax highlighting
+  - Async linting with `nvim-lint`
+  - Which-key popup for keymap hints
+
+---
+
+## 🛠 Installation
+
 ### Requirements
+- Neovim ≥ 0.9
+- Git
+- Patched font with Nerd Font glyph support
+- Terminal that supports TrueColor and glyphs
 
-- Neovim >= **0.9.0** (needs to be built with **LuaJIT**)
-- Git >= **2.19.0** (for partial clones support)
-- [LazyVim](https://www.lazyvim.org/)
-- a [Nerd Font](https://www.nerdfonts.com/)(v3.0 or greater) **_(optional, but needed to display some icons)_**
-- [lazygit](https://github.com/jesseduffield/lazygit) **_(optional)_**
-- a **C** compiler for `nvim-treesitter`. See [here](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
-- for [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) **_(optional)_**
-  - **live grep**: [ripgrep](https://github.com/BurntSushi/ripgrep)
-  - **find files**: [fd](https://github.com/sharkdp/fd)
-- a terminal that support true color and *undercurl*:
-  - [kitty](https://github.com/kovidgoyal/kitty) **_(Linux & Macos)_**
-  - [wezterm](https://github.com/wez/wezterm) **_(Linux, Macos & Windows)_**
-  - [alacritty](https://github.com/alacritty/alacritty) **_(Linux, Macos & Windows)_**
-  - [iterm2](https://iterm2.com/) **_(Macos)_**
-- [Solarized Osaka](https://github.com/craftzdog/solarized-osaka.nvim)
+### Install
 
-### inspiration from:
+1. Clone this repository:
 
-- [@Takuya Matsuyama on github](https://twitter.com/inkdrop_app](https://github.com/craftzdog))
+```bash
+cd ~/.config/ https://github.com/PinkMath/Nvim-config.git
+```
+
+2. Install fzf:
+
+```bash
+# Download with your package
+sudo apt install fzf
+```
+
+3. Open Neovim:
+```bash
+nvim
+```
+
+4. Plugins will automatically install on first startup via `vim-plug`.
+> If doesn't run `:PlugInstall`.
+
+### 📝 LSP Configuration
+
+- Managed automatically with mason.nvim and mason-lspconfig.
+
+- Lua, JS/TS, React, Python, C/C++, CSS, HTML, and Tailwind CSS are preconfigured.
+
+- Keymaps (in normal mode):
+
+    - gd → Go to definition
+
+    - K → Hover documentation
+
+    - gi → Go to implementation
+
+    - <leader>rn → Rename symbol
+
+    - <leader>ca → Code actions
+
+### 🎨 Themes
+
+Switch themes in `lua/config/theme.lua`:
+
+- solarized-osaka
+- catppuccin
+- gruvbox
+- pywal16
+
+
+### 🚀 Productivity & Navigation
+
+- Fuzzy finder: `<leader>f` (via `fzf-lua`)
+
+- Harpoon quick navigation: `<leader>h`
+
+- Git signs inline: added via `gitsigns.nvim`
+
+- Floating terminal: `<leader>t`
+
+- Treesitter for syntax highlighting and text objects
+
+- Twilight for dimming inactive code blocks
+
+### 📂 File Structure
+
+```Plain
+~/.config/nvim/
+├─ init.lua              # main entry
+├─ lua/
+│  ├─ config/
+│  │  ├─ options.lua     # Neovim options
+│  │  ├─ mappings.lua    # Keymaps
+│  │  ├─ theme.lua       # Theme loader
+│  │  └─ autocmd.lua     # Autocommands
+│  └─ plugins/
+│     ├─ lsp.lua         # LSP & completion setup
+│     ├─ fzf-lua.lua     # FZF config
+│     ├─ lualine.lua     # Statusline
+│     ├─ comment.lua     # Comment.nvim
+│     └─ ...             # Other plugin configs
+└─ README.md             # This file
+```
+
+### 🔧 Tips
+
+- Ensure your terminal supports patched Nerd Fonts for icons.
+- Optional: Use `pywal16` for automatic theme based on wallpaper colors.
+- LSP servers will be installed automatically via Mason.
+
+### 📌 Notes
+
+- Defered loading is used for non-essential plugins to reduce startup time.
+- Keymaps, LSP, and autocompletion are fully functional out-of-the-box.
+- Future-proof with `vim.lsp.config` style setup for LSP servers (Neovim ≥ 0.11).
+
+### 💖 Credits
+
+- Inspired by [@ThePrimeagen](https://github.com/ThePrimeagen) and other modern Neovim configs. Arch BTW.
+- I used [@BreadOnPenguins](https://github.com/BreadOnPenguins) as base to create the config. Thank you Bread :).
+- I also took some ideas from [@Takuya Matsuyama](https://github.com/craftzdog), to make the code clean. I like your videos <3.
+
 <div>
