@@ -59,7 +59,7 @@ A fast, modern Neovim setup optimized for **programming in Lua, JavaScript/TypeS
 1. Clone this repository:
 
 ```bash
-cd ~/.config/ https://github.com/PinkMath/Nvim-config.git
+cd ~/.config/ && https://github.com/PinkMath/Nvim-config.git
 ```
 
 2. Install fzf:
