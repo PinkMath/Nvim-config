@@ -20,9 +20,6 @@ vim.call('plug#begin')
 
 Plug('ThePrimeagen/harpoon', { ['branch'] = 'harpoon2' }) --yay theprimeagen
 Plug('nvim-lua/plenary.nvim')
-Plug('catppuccin/nvim', { ['as'] = 'catppuccin' }) --colorscheme
-Plug('ellisonleao/gruvbox.nvim', { ['as'] = 'gruvbox' }) --colorscheme 2
-Plug('uZer/pywal16.nvim', { [ 'as' ] = 'pywal16' }) --or, pywal colorscheme
 Plug('nvim-lualine/lualine.nvim') --statusline
 Plug('nvim-tree/nvim-web-devicons') --pretty icons
 Plug('folke/which-key.nvim') --mappings popup
@@ -48,8 +45,12 @@ Plug('hrsh7th/cmp-buffer')             -- buffer words
 Plug('hrsh7th/cmp-path')               -- filesystem paths
 Plug('L3MON4D3/LuaSnip')               -- snippet engine
 Plug('saadparwaiz1/cmp_luasnip')       -- snippet completions
--- Extra theme
+-- Theme
 Plug('craftzdog/solarized-osaka.nvim')
+Plug('catppuccin/nvim', { ['as'] = 'catppuccin' }) --colorscheme
+Plug('ellisonleao/gruvbox.nvim', { ['as'] = 'gruvbox' }) --colorscheme 2
+Plug('uZer/pywal16.nvim', { [ 'as' ] = 'pywal16' }) --or, pywal colorscheme
+Plug('rose-pine/neovim', { [ 'as' ] = 'rose-pine' }) --theme rose-pine
 
 vim.call('plug#end')
 
@@ -58,7 +59,10 @@ require("config.theme")
 require("config.mappings")
 require("config.options")
 require("config.autocmd")
--- require("plugins.autopairs")
+
+-- Plug
+require("plugins.autopairs")
+require("plugins.rose-pine-theme")
 require("plugins.lsp")
 require("plugins.colorizer")
 require("plugins.colorscheme")
@@ -66,23 +70,21 @@ require("plugins.comment")
 require("plugins.fzf-lua")
 require("plugins.gitsigns")
 require("plugins.lualine")
-require("plugins.harpoon")
 require("plugins.nvim-lint")
 require("plugins.render-markdown")
--- require("plugins.treesitter")
--- require("plugins.twilight")
--- require("plugins.which-key")
+require("plugins.treesitter")
 
 vim.defer_fn(function() 
 		--defer non-essential configs,
 		--purely for experimental purposes:
 		--this only makes a difference of +-10ms on initial startup
-require("plugins.autopairs")
-require("plugins.fterm")
-require("plugins.treesitter")
-require("plugins.fzf-lua")
-require("plugins.twilight")
-require("plugins.which-key")
+		require("plugins.autopairs")
+		require("plugins.harpoon")
+		require("plugins.fterm")
+		require("plugins.treesitter")
+		require("plugins.fzf-lua")
+		require("plugins.twilight")
+		require("plugins.which-key")
 end, 100)
 
 load_theme()

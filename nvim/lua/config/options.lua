@@ -30,6 +30,9 @@ local options = {
 	
 	termguicolors = true,
 
+	scrolloff = 10, -- minimal number of screen lines to keep above the cursor
+	hlsearch = true, -- nice, idk
+
 	ignorecase = true, --ignore case while searching
 	smartcase = true, --but do not ignore if caps are used
 
