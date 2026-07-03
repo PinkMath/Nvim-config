@@ -11,7 +11,7 @@ colors.setup({
   enable_tailwind = true,
   enable_var_usage = true,
 
-  virtual_symbol = "■",
+  virtual_symbol = "#",
 
   exclude_filetypes = {
     "lazy",

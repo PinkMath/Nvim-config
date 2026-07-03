@@ -9,17 +9,24 @@ local function map(mode, lhs, rhs, desc)
   })
 end
 
+local toggles = require("config.toggles")
+local utils = require("config.utils")
+
 -- Basic
 map("n", "<leader>w", ":w<CR>", "Save file")
-map("n", "<Esc>", ":nohlsearch<CR>") --petty cool
-map({"n", "v"}, "<C-d>", "<C-d>zz") --petty cool
-map({"n", "v"}, "<C-u>", "<C-u>zz") --petty cool
-map("v", "J", ":m '>+1<CR>gv=gv") --petty cool
-map("v", "K", ":m '<-2<CR>gv=gv") --petty cool
-map("n", "J", "mzJ`z") --petty cool
-map("n", "n", "nzzzv") --petty cool
-map("n", "N", "Nzzzv") --petty cool
-map("n", "<C-a>", "ggVG") --select the whole code as a C-a lol
+map("n", "<Esc>", ":nohlsearch<CR>")
+map({ "n", "v" }, "<C-d>", "<C-d>zz")
+map({ "n", "v" }, "<C-u>", "<C-u>zz")
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
+map("n", "J", "mzJ`z")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
+map("n", "<C-a>", "ggVG")
+
+-- UI toggles
+map("n", "<leader>nn", toggles.relative_numbers, "Toggle relative numbers")
+map("n", "<leader>bb", toggles.transparent_background, "Toggle transparent background")
 
 -- FZF
 map("n", "<leader>f", function()
@@ -50,10 +57,9 @@ map("n", "sk", "<C-w>k") --window - go to up
 map("n", "sl", "<C-w>l") --window - go to right
 
 -- misc
-map("n", "<leader>P", ":PlugInstall<CR>") --vim-plug-install
-map("n", "<leader>U", ":PlugUpdate<CR>") --vim-plug-update
-map("n", "<leader>R", ":so %<CR>") --reload neovim config
-map("n", "<leader>u", ':silent !xdg-open "<cWORD>" &<CR>') --open a url under cursor
-map("n", "<leader>pv", ":Ex<CR>") --Buffer
-map("n", "<leader>S", ":%s//g<Left><Left>") --replace all - dont replace ':' to ':', dont ask why
-
+map("n", "<leader>P", ":PlugInstall<CR>", "Install plugins")
+map("n", "<leader>U", ":PlugUpdate<CR>", "Update plugins")
+map("n", "<leader>R", ":source %<CR>", "Reload current Lua file")
+map("n", "<leader>u", utils.open_under_cursor, "Open path or URL")
+map("n", "<leader>pv", ":Ex<CR>", "Open file browser")
+map("n", "<leader>S", ":%s//g<Left><Left>", "Replace in file")
