@@ -1,176 +1,110 @@
-# Loavy Neovim Config
+# ☁️ Loavy's Neovim Config
 
-A clean, minimal Neovim 0.11+ configuration for Windows and Linux. It uses
-vim-plug, Kanagawa, Treesitter, LSP, completion, `fzf-lua`, Gitsigns, Harpoon,
-Conform, and optional image previews.
+A clean, minimal, and aesthetic Neovim (0.11+) configuration. Built for speed and simplicity across Windows and Linux. 
 
-## Requirements
+Powered by `vim-plug`, Kanagawa, Treesitter, native LSP, `fzf-lua`, and a carefully curated selection of plugins to keep your workflow fast and distraction-free.
 
-Required:
+## 🎀 Prerequisites
 
-- Neovim 0.11 or newer
-- Git
-- A terminal with TrueColor support
-- A Nerd Font (recommended for the best icon coverage)
-- [ripgrep](https://github.com/BurntSushi/ripgrep) for live grep
-- [fzf](https://github.com/junegunn/fzf) for `fzf-lua`
-- A C compiler when a Treesitter parser needs to be built
+- **Neovim** 0.11 or newer
+- **Git**
+- A TrueColor supported terminal
+- A **Nerd Font** (JetBrainsMono, CaskaydiaCove, or FiraCode recommended)
+- `ripgrep` & `fzf` (for lightning-fast searches)
+- A C compiler (for Treesitter parsers)
 
-Language servers and formatters have their own runtimes. For example, many web
-development tools require Node.js and npm.
+*Note: Language servers and formatters have their own runtimes (e.g., Node.js).*
 
-The vim-plug bootstrap uses Git directly and does not assume that `curl`,
-`wget`, Bash, or other Unix tools are installed.
+## 🚀 Installation
 
-## Installation
+*(Remember to back up your existing config before cloning!)*
 
-Back up an existing config before cloning.
-
-### Linux
-
+**Linux / macOS:**
 ```sh
-git clone https://github.com/loavy/nvim ~/.config/nvim
+git clone [https://github.com/loavy/nvim](https://github.com/loavy/nvim) ~/.config/nvim
 nvim
 ```
 
-### Windows
-
-From PowerShell:
-
+**Windows (PowerShell):**
 ```powershell
-git clone https://github.com/loavy/nvim $env:LOCALAPPDATA\nvim
+git clone [https://github.com/loavy/nvim](https://github.com/loavy/nvim) $env:LOCALAPPDATA\nvim
 nvim
 ```
 
-Plugins install automatically on the first start. If an installation was
-interrupted, run `:PlugInstall` and restart Neovim.
+*Plugins will automatically install on the first launch. If interrupted, simply run `:PlugInstall` and restart Neovim.*
 
-## Fonts and icons
+## 🎨 Theme & UI
 
-Set the font in your terminal emulator, not in Neovim. Good choices include:
-
-- JetBrainsMono Nerd Font
-- CaskaydiaCove Nerd Font
-- FiraCode Nerd Font
-- Hack Nerd Font
-
-The config does not hardcode a GUI font. Its core signs use plain characters,
-so editing remains readable when a Nerd Font is unavailable.
-
-## Theme and UI toggles
-
-Kanagawa Wave is the default colorscheme. It has strong support for Treesitter,
-LSP diagnostics, completion menus, fuzzy-finder windows, and common plugin
-highlight groups.
-
-The colorscheme name is defined in one place:
-`lua/config/theme.lua`. Install a replacement theme and change the
-`colorscheme` value there to switch.
-
-Relative numbers are enabled by default. The current line remains absolute,
-while other lines are relative. Transparency is disabled by default.
+This config uses the beautiful **Kanagawa Wave** colorscheme by default. 
+- Change the theme name anytime in `lua/config/theme.lua`.
+- Relative line numbers are enabled by default (current line is absolute).
 
 | Keymap | Action |
 |---|---|
 | `<leader>nn` | Toggle relative line numbers |
-| `<leader>bb` | Toggle transparent backgrounds |
+| `<leader>bb` | Toggle transparent background |
 
-Transparency is reapplied after `:colorscheme` changes. Turning it off reloads
-the active colorscheme to restore its normal backgrounds.
+## ⌨️ Keymaps
 
-## Main keymaps
-
-The leader key is Space.
+The leader key is set to **Space**.
 
 | Keymap | Action |
 |---|---|
-| `<leader>w` | Save |
+| `<leader>w` | Save file |
 | `<leader>f` | Find files |
 | `<leader>g` | Live grep |
 | `<leader>b` | Find buffers |
-| `<leader>a` | Add the current file to Harpoon |
-| `<leader>h` | Open the Harpoon menu |
-| `<leader>u` | Open the path or URL under the cursor |
-| `<leader>=` or `=` | Format the current file |
+| `<leader>a` | Add file to Harpoon |
+| `<leader>h` | Open Harpoon menu |
+| `<leader>u` | Open URL/path under cursor |
+| `<leader>=` or `=` | Format current file |
 | `<leader>P` | Install plugins |
 | `<leader>U` | Update plugins |
 
-LSP buffer keymaps include `gd`, `gD`, `gr`, `gi`, `K`, `<leader>rn`,
-`<leader>ca`, `<leader>d`, `[d`, and `]d`.
+**LSP specific:** `gd`, `gD`, `gr`, `gi`, `K`, `<leader>rn`, `<leader>ca`, `<leader>d`, `[d`, `]d`.
 
-## Optional image previews
+## 🛠️ LSP & Mason Setup
 
-[`3rd/image.nvim`](https://github.com/3rd/image.nvim) is lazy-loaded only for
-supported document filetypes. Remote image downloads are disabled.
-
-To enable previews, install ImageMagick and use a terminal that implements the
-Kitty graphics protocol. Kitty provides the best support; WezTerm and Ghostty
-may also work. Tmux requires its graphics passthrough settings to be enabled.
-
-Native Windows is skipped because image.nvim currently relies on Unix terminal
-size APIs. The rest of the config works normally on Windows, and image previews
-can be used from WSL with a compatible terminal. Missing ImageMagick or terminal
-graphics support never prevents Neovim from starting.
-
-## LSP setup
-
-Open `:Mason` and install only the servers you need. The config enables:
+Open `:Mason` in Neovim to manage your language servers. Based on this configuration, install the following packages using their exact Mason codes:
 
 ```text
-lua_ls
-ts_ls
-html
-cssls
-tailwindcss
-emmet_language_server
-jsonls
-pyright
-gopls
-rust_analyzer
+bash-language-server
+css-lsp
+docker-compose-language-service
+dockerfile-language-server
+emmet-language-server
+html-lsp
 intelephense
-bashls
-dockerls
-docker_compose_language_service
-yamlls
+json-lsp
+lua-language-server
+pyright
+rust-analyzer
+tailwindcss-language-server
+typescript-language-server
+yaml-language-server
 ```
+*After installation, restart Neovim and run `:checkhealth vim.lsp` to verify.*
 
-After installation, restart Neovim and run:
+## 🖼️ Optional Image Previews
 
-```vim
-:checkhealth vim.lsp
-```
+`3rd/image.nvim` is lazy-loaded for supported document filetypes. 
+- Requires **ImageMagick** and a terminal with graphics protocol support (like **Kitty**, Ghostty, or WezTerm). 
+- Not supported natively on Windows (works via WSL). If you don't have the requirements, Neovim will still start up perfectly fine without it.
 
-## Structure
+## 📂 Structure
 
 ```text
 nvim/
-|-- init.lua
-|-- lua/
-|   |-- config/
-|   |   |-- autocmd.lua
-|   |   |-- mappings.lua
-|   |   |-- options.lua
-|   |   |-- theme.lua
-|   |   |-- toggles.lua
-|   |   `-- utils.lua
-|   `-- plugins/
-|       |-- image.lua
-|       |-- kanagawa.lua
-|       `-- ...
-`-- README.md
+├── init.lua
+└── lua/
+    ├── config/      # Core settings, keymaps, and options
+    └── plugins/     # Individual plugin configurations
 ```
+*No hardcoded paths. Opening URLs uses Neovim's native cross-platform `vim.ui.open()`.*
 
-All paths are derived from Neovim's standard paths. The config does not contain
-hardcoded Windows or Linux home directories, and opening URLs uses Neovim's
-cross-platform `vim.ui.open()`.
+## ✨ Handy Commands
 
-## Useful commands
-
-```vim
-:PlugInstall
-:PlugUpdate
-:PlugClean
-:TSUpdate
-:Mason
-:checkhealth
-```
+- `:PlugInstall` / `:PlugUpdate` / `:PlugClean`
+- `:TSUpdate` (Update Treesitter parsers)
+- `:Mason` (Manage LSPs and formatters)
+- `:checkhealth` (Troubleshoot your setup)
